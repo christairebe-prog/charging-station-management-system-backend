@@ -57,4 +57,8 @@ public class ChargingPointService {
         chargingPointRepository.delete(existing.get());
         return "Charging point deleted successfully";
     }
+
+    public List<ChargingPoint> findFreeChargingPoints() {
+        return chargingPointRepository.findFreeChargingPoints();
+    }
 }

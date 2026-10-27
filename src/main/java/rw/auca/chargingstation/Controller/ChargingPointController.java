@@ -46,9 +46,9 @@ public class ChargingPointController {
         if (chargingPoint.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("The charging point with that id does not exist");
-        } else {
-            return ResponseEntity.ok(chargingPoint.get());
         }
+
+        return ResponseEntity.ok(chargingPoint.get());
     }
 
     @PutMapping("/update/{id}")
@@ -60,9 +60,9 @@ public class ChargingPointController {
 
         if (message.equals("The charging point with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -71,8 +71,13 @@ public class ChargingPointController {
 
         if (message.equals("The charging point with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/free")
+    public ResponseEntity<List<ChargingPoint>> findFreeChargingPoints() {
+        return ResponseEntity.ok(chargingPointService.findFreeChargingPoints());
     }
 }

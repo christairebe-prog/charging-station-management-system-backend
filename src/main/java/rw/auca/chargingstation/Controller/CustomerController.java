@@ -18,15 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.chargingstation.Customer;
 import rw.auca.chargingstation.Service.CustomerService;
+import rw.auca.chargingstation.Service.TechnicianService;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final TechnicianService technicianService;
 
-    public CustomerController(CustomerService customerService) {
+    public CustomerController(
+            CustomerService customerService,
+            TechnicianService technicianService) {
         this.customerService = customerService;
+        this.technicianService = technicianService;
     }
 
     @PostMapping("/save")
@@ -47,9 +52,9 @@ public class CustomerController {
         if (customer.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("The customer with that id does not exist");
-        } else {
-            return ResponseEntity.ok(customer.get());
         }
+
+        return ResponseEntity.ok(customer.get());
     }
 
     @PutMapping("/update/{id}")
@@ -61,9 +66,9 @@ public class CustomerController {
 
         if (message.equals("The customer with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -72,9 +77,9 @@ public class CustomerController {
 
         if (message.equals("The customer with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/by-last-name")
@@ -82,5 +87,18 @@ public class CustomerController {
             @RequestParam String lastName) {
         return ResponseEntity.ok(
                 customerService.findByLastName(lastName));
+    }
+
+    @GetMapping("/of-technician/{technicianId}")
+    public ResponseEntity<?> findCustomersByTechnician(
+            @PathVariable UUID technicianId) {
+
+        if (technicianService.findById(technicianId).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("The technician with that id does not exist");
+        }
+
+        return ResponseEntity.ok(
+                customerService.findCustomersByTechnician(technicianId));
     }
 }

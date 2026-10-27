@@ -60,4 +60,8 @@ public class TechnicianService {
         technicianRepository.delete(existing.get());
         return "Technician deleted successfully";
     }
+
+    public List<Technician> findByConnectorTypeName(String name) {
+        return technicianRepository.findByConnectorTypeName(name);
+    }
 }

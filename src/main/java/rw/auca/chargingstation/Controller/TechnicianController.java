@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rw.auca.chargingstation.Service.TechnicianService;
@@ -46,9 +47,9 @@ public class TechnicianController {
         if (technician.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("The technician with that id does not exist");
-        } else {
-            return ResponseEntity.ok(technician.get());
         }
+
+        return ResponseEntity.ok(technician.get());
     }
 
     @PutMapping("/update/{id}")
@@ -60,9 +61,9 @@ public class TechnicianController {
 
         if (message.equals("The technician with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -71,8 +72,16 @@ public class TechnicianController {
 
         if (message.equals("The technician with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/by-connector-type")
+    public ResponseEntity<List<Technician>> findByConnectorType(
+            @RequestParam String name) {
+
+        return ResponseEntity.ok(
+                technicianService.findByConnectorTypeName(name));
     }
 }

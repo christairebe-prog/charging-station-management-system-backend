@@ -58,4 +58,8 @@ public class ConnectorTypeService {
         connectorTypeRepository.delete(existing.get());
         return "Connector type deleted successfully";
     }
+
+    public List<ConnectorType> findUnusedConnectorTypes() {
+        return connectorTypeRepository.findUnusedConnectorTypes();
+    }
 }

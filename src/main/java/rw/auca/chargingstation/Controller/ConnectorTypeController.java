@@ -34,7 +34,6 @@ public class ConnectorTypeController {
             @RequestBody ConnectorType connectorType) {
 
         String message = connectorTypeService.save(connectorType);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(message);
     }
 
@@ -50,9 +49,9 @@ public class ConnectorTypeController {
         if (connectorType.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("The connector type with that id does not exist");
-        } else {
-            return ResponseEntity.ok(connectorType.get());
         }
+
+        return ResponseEntity.ok(connectorType.get());
     }
 
     @PutMapping("/update/{id}")
@@ -62,23 +61,27 @@ public class ConnectorTypeController {
 
         String message = connectorTypeService.update(id, connectorType);
 
-        if (message.equals(
-                "The connector type with that id does not exist")) {
+        if (message.equals("The connector type with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable UUID id) {
         String message = connectorTypeService.delete(id);
 
-        if (message.equals(
-                "The connector type with that id does not exist")) {
+        if (message.equals("The connector type with that id does not exist")) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
-        } else {
-            return ResponseEntity.ok(message);
         }
+
+        return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/unused")
+    public ResponseEntity<List<ConnectorType>> findUnusedConnectorTypes() {
+        return ResponseEntity.ok(
+                connectorTypeService.findUnusedConnectorTypes());
     }
 }

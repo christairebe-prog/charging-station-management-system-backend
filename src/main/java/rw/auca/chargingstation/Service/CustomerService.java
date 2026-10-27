@@ -65,4 +65,8 @@ public class CustomerService {
         return customerRepository
                 .findByLastNameIgnoreCaseOrderByFirstNameAsc(lastName);
     }
+
+    public List<Customer> findCustomersByTechnician(UUID technicianId) {
+        return customerRepository.findCustomersByTechnician(technicianId);
+    }
 }
