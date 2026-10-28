@@ -70,6 +70,26 @@ public class ChargingSessionController {
                 chargingSessionService.findBetweenDates(startDate, endDate));
     }
 
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> countSessionsByStatus() {
+        return ResponseEntity.ok(
+                chargingSessionService.countSessionsByStatus());
+    }
+
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelSessionsForTechnicianOnDate(
+            @RequestParam UUID technicianId,
+            @RequestParam String date) {
+        LocalDate sessionDate = LocalDate.parse(date);
+
+        int cancelledCount =
+                chargingSessionService.cancelSessionsForTechnicianOnDate(
+                        technicianId, sessionDate);
+
+        return ResponseEntity.ok(
+                cancelledCount + " charging sessions cancelled");
+    }
+
     @PatchMapping("/{id}/status")
     public ResponseEntity<String> updateStatus(
             @PathVariable UUID id,

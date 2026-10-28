@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import rw.auca.chargingstation.ChargingSession;
@@ -77,8 +78,6 @@ public class ChargingSessionService {
             existingSession.setCustomer(updatedSession.getCustomer());
             existingSession.setTechnician(updatedSession.getTechnician());
 
-
-
             return chargingSessionRepository.save(existingSession);
         });
     }
@@ -133,5 +132,16 @@ public class ChargingSessionService {
         chargingSessionRepository.save(session);
 
         return "Charging session status updated successfully";
+    }
+
+    public List<Object[]> countSessionsByStatus() {
+        return chargingSessionRepository.countSessionsByStatus();
+    }
+
+    @Transactional
+    public int cancelSessionsForTechnicianOnDate(
+            UUID technicianId, LocalDate date) {
+        return chargingSessionRepository
+                .cancelSessionsForTechnicianOnDate(technicianId, date);
     }
 }
