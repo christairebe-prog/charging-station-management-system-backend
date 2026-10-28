@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import rw.auca.chargingstation.ChargingSession;
 import rw.auca.chargingstation.Service.ChargingSessionService;
@@ -27,15 +29,22 @@ public class ChargingSessionController {
 
     private final ChargingSessionService chargingSessionService;
 
-    public ChargingSessionController(ChargingSessionService chargingSessionService) {
+    public ChargingSessionController(
+            ChargingSessionService chargingSessionService) {
         this.chargingSessionService = chargingSessionService;
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody ChargingSession chargingSession) {
-        chargingSessionService.save(chargingSession);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Charging session saved successfully");
+    public ResponseEntity<String> save(
+            @RequestBody ChargingSession chargingSession) {
+        try {
+            chargingSessionService.save(chargingSession);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Charging session saved successfully");
+        } catch (ResponseStatusException exception) {
+            return ResponseEntity.status(exception.getStatusCode())
+                    .body(exception.getReason());
+        }
     }
 
     @GetMapping("/all")
@@ -46,7 +55,8 @@ public class ChargingSessionController {
     @GetMapping("/by-status")
     public ResponseEntity<List<ChargingSession>> findByStatus(
             @RequestParam SessionStatus status) {
-        return ResponseEntity.ok(chargingSessionService.findByStatus(status));
+        return ResponseEntity.ok(
+                chargingSessionService.findByStatus(status));
     }
 
     @GetMapping("/between")
@@ -58,6 +68,27 @@ public class ChargingSessionController {
 
         return ResponseEntity.ok(
                 chargingSessionService.findBetweenDates(startDate, endDate));
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> updateStatus(
+            @PathVariable UUID id,
+            @RequestParam SessionStatus status) {
+        try {
+            String message =
+                    chargingSessionService.updateStatus(id, status);
+
+            if (message.equals(
+                    "The charging session with that id does not exist")) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(message);
+            }
+
+            return ResponseEntity.ok(message);
+        } catch (ResponseStatusException exception) {
+            return ResponseEntity.status(exception.getStatusCode())
+                    .body(exception.getReason());
+        }
     }
 
     @GetMapping("/{id}")

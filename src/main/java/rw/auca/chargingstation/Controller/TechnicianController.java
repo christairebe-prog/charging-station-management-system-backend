@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -83,5 +84,45 @@ public class TechnicianController {
 
         return ResponseEntity.ok(
                 technicianService.findByConnectorTypeName(name));
+    }
+
+    @PutMapping("/{technicianId}/connector-types/{connectorTypeId}")
+    public ResponseEntity<String> addConnectorType(
+            @PathVariable UUID technicianId,
+            @PathVariable UUID connectorTypeId) {
+
+        String message = technicianService.addConnectorType(
+                technicianId, connectorTypeId);
+
+        if (message.equals("The technician with that id does not exist")
+                || message.equals("That connector type does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+
+        if (message.equals("The technician already has that connector type")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+
+        return ResponseEntity.ok(message);
+    }
+
+    @PatchMapping("/{technicianId}/charging-point")
+    public ResponseEntity<String> changeChargingPoint(
+            @PathVariable UUID technicianId,
+            @RequestParam int pointNumber) {
+
+        String message = technicianService.changeChargingPoint(
+                technicianId, pointNumber);
+
+        if (message.equals("The technician with that id does not exist")
+                || message.equals("The charging point with that pointNumber does not exist")) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(message);
+        }
+
+        if (message.equals("That charging point is taken by another technician")) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(message);
+        }
+
+        return ResponseEntity.ok(message);
     }
 }
