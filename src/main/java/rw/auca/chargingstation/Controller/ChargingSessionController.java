@@ -5,6 +5,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,6 +54,42 @@ public class ChargingSessionController {
     @GetMapping("/all")
     public ResponseEntity<List<ChargingSession>> findAll() {
         return ResponseEntity.ok(chargingSessionService.findAll());
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<ChargingSession>> findAllPaged(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "sessionDate,desc") String sort) {
+
+        if (page < 0 || size < 1) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        String[] sortParts = sort.split(",", 2);
+        String sortField = sortParts[0].trim();
+
+        if (sortField.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Sort.Direction direction = Sort.Direction.DESC;
+
+        if (sortParts.length > 1) {
+            try {
+                direction = Sort.Direction.fromString(sortParts[1].trim());
+            } catch (IllegalArgumentException exception) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(direction, sortField));
+
+        return ResponseEntity.ok(
+                chargingSessionService.findAll(pageable));
     }
 
     @GetMapping("/by-status")

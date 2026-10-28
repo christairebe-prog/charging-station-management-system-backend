@@ -39,4 +39,8 @@ public interface ChargingSessionRepository extends JpaRepository<ChargingSession
     int cancelSessionsForTechnicianOnDate(
             @Param("technicianId") UUID technicianId,
             @Param("date") LocalDate date);
+
+    long countBySessionDate(LocalDate sessionDate);
+
+    long countByStatus(SessionStatus status);
 }

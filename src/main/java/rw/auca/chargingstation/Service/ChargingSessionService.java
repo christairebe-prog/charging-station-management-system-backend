@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +22,7 @@ public class ChargingSessionService {
 
     private final ChargingSessionRepository chargingSessionRepository;
 
-    public ChargingSessionService(
-            ChargingSessionRepository chargingSessionRepository) {
+    public ChargingSessionService(ChargingSessionRepository chargingSessionRepository) {
         this.chargingSessionRepository = chargingSessionRepository;
     }
 
@@ -39,15 +40,12 @@ public class ChargingSessionService {
                 : chargingSession.getTechnician().getId();
 
         if (technicianId != null) {
-            boolean technicianAlreadyBooked =
-                    chargingSessionRepository.findAll().stream()
-                            .anyMatch(existingSession ->
-                                    existingSession.getSessionDate().equals(sessionDate)
+            boolean technicianAlreadyBooked = chargingSessionRepository.findAll().stream()
+                    .anyMatch(existingSession ->
+                            existingSession.getSessionDate().equals(sessionDate)
                                     && existingSession.getTechnician() != null
-                                    && technicianId.equals(
-                                            existingSession.getTechnician().getId())
-                                    && existingSession.getStatus()
-                                            != SessionStatus.CANCELLED);
+                                    && technicianId.equals(existingSession.getTechnician().getId())
+                                    && existingSession.getStatus() != SessionStatus.CANCELLED);
 
             if (technicianAlreadyBooked) {
                 throw new ResponseStatusException(
@@ -57,7 +55,6 @@ public class ChargingSessionService {
         }
 
         chargingSession.setStatus(SessionStatus.RESERVED);
-
         return chargingSessionRepository.save(chargingSession);
     }
 
@@ -65,12 +62,15 @@ public class ChargingSessionService {
         return chargingSessionRepository.findAll();
     }
 
+    public Page<ChargingSession> findAll(Pageable pageable) {
+        return chargingSessionRepository.findAll(pageable);
+    }
+
     public Optional<ChargingSession> findById(UUID id) {
         return chargingSessionRepository.findById(id);
     }
 
-    public Optional<ChargingSession> update(
-            UUID id, ChargingSession updatedSession) {
+    public Optional<ChargingSession> update(UUID id, ChargingSession updatedSession) {
         return chargingSessionRepository.findById(id).map(existingSession -> {
             existingSession.setSessionDate(updatedSession.getSessionDate());
             existingSession.setVehicleModel(updatedSession.getVehicleModel());
@@ -92,19 +92,15 @@ public class ChargingSessionService {
     }
 
     public List<ChargingSession> findByStatus(SessionStatus status) {
-        return chargingSessionRepository
-                .findByStatusOrderBySessionDateAsc(status);
+        return chargingSessionRepository.findByStatusOrderBySessionDateAsc(status);
     }
 
-    public List<ChargingSession> findBetweenDates(
-            LocalDate start, LocalDate end) {
-        return chargingSessionRepository
-                .findBySessionDateBetweenOrderBySessionDateAsc(start, end);
+    public List<ChargingSession> findBetweenDates(LocalDate start, LocalDate end) {
+        return chargingSessionRepository.findBySessionDateBetweenOrderBySessionDateAsc(start, end);
     }
 
     public String updateStatus(UUID id, SessionStatus newStatus) {
-        Optional<ChargingSession> optionalSession =
-                chargingSessionRepository.findById(id);
+        Optional<ChargingSession> optionalSession = chargingSessionRepository.findById(id);
 
         if (optionalSession.isEmpty()) {
             return "The charging session with that id does not exist";
@@ -116,16 +112,15 @@ public class ChargingSessionService {
         boolean allowedTransition =
                 (currentStatus == SessionStatus.RESERVED
                         && (newStatus == SessionStatus.CHARGING
-                                || newStatus == SessionStatus.CANCELLED))
+                        || newStatus == SessionStatus.CANCELLED))
                 || (currentStatus == SessionStatus.CHARGING
                         && (newStatus == SessionStatus.ENDED
-                                || newStatus == SessionStatus.CANCELLED));
+                        || newStatus == SessionStatus.CANCELLED));
 
         if (!allowedTransition) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
-                    "Cannot change status from "
-                            + currentStatus + " to " + newStatus);
+                    "Cannot change status from " + currentStatus + " to " + newStatus);
         }
 
         session.setStatus(newStatus);
@@ -139,9 +134,7 @@ public class ChargingSessionService {
     }
 
     @Transactional
-    public int cancelSessionsForTechnicianOnDate(
-            UUID technicianId, LocalDate date) {
-        return chargingSessionRepository
-                .cancelSessionsForTechnicianOnDate(technicianId, date);
+    public int cancelSessionsForTechnicianOnDate(UUID technicianId, LocalDate date) {
+        return chargingSessionRepository.cancelSessionsForTechnicianOnDate(technicianId, date);
     }
 }
