@@ -1,0 +1,1127 @@
+{
+  "info": {
+    "_postman_id": "f93b7f09-8c80-4bd8-aaa2-9c99d07bff33",
+    "name": "charging-station-management-system-midterm.postman_collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58409016"
+  },
+  "item": [
+    {
+      "name": "A2 CRUD",
+      "item": [
+        {
+          "name": "Get Customer By ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Nonexistent Customer",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Customer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Demo\",\r\n  \"lastName\": \"Customer\",\r\n  \"plateNumber\": \"RAC 908 Z\",\r\n  \"phone\": \"0788000999\",\r\n  \"email\": \"demo.customer@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/customers/save",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "customers",
+                "save"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update customer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/customers/update/0a54989f-f47d-4ebd-901b-b0b94678cf44",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "customers",
+                "update",
+                "0a54989f-f47d-4ebd-901b-b0b94678cf44"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Nonexistent Customer",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"Jean\",\r\n  \"lastName\": \"Gatete\",\r\n  \"plateNumber\": \"RAE 456 B\",\r\n  \"phone\": \"0788111001\",\r\n  \"email\": \"jean.gatete@example.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/customers/update/00000000-0000-0000-0000-000000000000",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "customers",
+                "update",
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "New request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "A1 Connector_types",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/connector-types/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "connector-types",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A1  Charging_points",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-points/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-points",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A1  Technicians",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/technicians/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "technicians",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A1  Customers",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/customers/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "customers",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A1 10 Charging_sessions",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B1",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/customers/by-last-name?lastName=gatete",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "customers",
+            "by-last-name"
+          ],
+          "query": [
+            {
+              "key": "lastName",
+              "value": "gatete",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B2",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/by-status?status=RESERVED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "by-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "RESERVED",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B3",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/between?start=2026-10-01&end=2026-10-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "between"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01",
+              "sortOrder": 0
+            },
+            {
+              "key": "end",
+              "value": "2026-10-31",
+              "sortOrder": 1
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C1",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/technicians/by-connector-type?name=ccs",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "technicians",
+            "by-connector-type"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "ccs",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C2",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-points/free",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-points",
+            "free"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C3",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/connector-types/unused",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "connector-types",
+            "unused"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/customers/of-technician/d840ba96-4d1d-41d8-8d78-fba7d9b6a84d",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "customers",
+            "of-technician",
+            "d840ba96-4d1d-41d8-8d78-fba7d9b6a84d"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4 wrong ID",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/customers/of-technician/00000000-0000-0000-0000-000000000000",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "customers",
+            "of-technician",
+            "00000000-0000-0000-0000-000000000000"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sessionDate\": \"2026-10-20\",\r\n  \"vehicleModel\": \"Tesla Model 3\",\r\n  \"kwhRequested\": 30.0,\r\n  \"status\": \"CHARGING\",\r\n  \"customer\": {\r\n    \"id\": \"0a54989f-f47d-4ebd-901b-b0b94678cf44\"\r\n  },\r\n  \"technician\": {\r\n    \"id\": \"d840ba96-4d1d-41d8-8d78-fba7d9b6a84d\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1 (double booking prevention)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sessionDate\": \"2026-10-28\",\r\n  \"vehicleModel\": \"Tesla Model 3\",\r\n  \"kwhRequested\": 30.0,\r\n  \"status\": \"RESERVED\",\r\n  \"customer\": {\r\n    \"id\": \"0a54989f-f47d-4ebd-901b-b0b94678cf44\"\r\n  },\r\n  \"technician\": {\r\n    \"id\": \"d840ba96-4d1d-41d8-8d78-fba7d9b6a84d\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1( new sessions as reserved)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sessionDate\": \"2026-10-28\",\r\n  \"vehicleModel\": \"Nissan Leaf\",\r\n  \"kwhRequested\": 20.0,\r\n  \"status\": \"CHARGING\",\r\n  \"customer\": {\r\n    \"id\": \"d87fc4ca-1905-4e2d-9e68-1821d663b1c7\"\r\n  },\r\n  \"technician\": {\r\n    \"id\": \"8fbbec0c-63a5-41ea-a436-b656dcc260f2\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2(charging)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1/status?status=CHARGING",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CHARGING",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2(charging to ended)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1/status?status=ENDED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "ENDED",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2(reject an invalid transaction)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1/status?status=CANCELLED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CANCELLED",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2(ID that does not exist)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/00000000-0000-0000-0000-000000000000/status?status=CHARGING",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "00000000-0000-0000-0000-000000000000",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "CHARGING",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2(Confirm PUT cannot change the status)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"sessionDate\": \"2026-10-28\",\r\n  \"vehicleModel\": \"Nissan Leaf\",\r\n  \"kwhRequested\": 20.0,\r\n  \"status\": \"CANCELLED\",\r\n  \"customer\": {\r\n    \"id\": \"d87fc4ca-1905-4e2d-9e68-1821d663b1c7\"\r\n  },\r\n  \"technician\": {\r\n    \"id\": \"8fbbec0c-63a5-41ea-a436-b656dcc260f2\"\r\n  }\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/update/f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "update",
+            "f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D3",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/technicians/b466f44f-83a1-45cf-ad12-7186681bd791/connector-types/ad79f573-ef42-450a-91ac-4dc7825cea41",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "technicians",
+            "b466f44f-83a1-45cf-ad12-7186681bd791",
+            "connector-types",
+            "ad79f573-ef42-450a-91ac-4dc7825cea41"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/technicians/b466f44f-83a1-45cf-ad12-7186681bd791/charging-point?pointNumber=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "technicians",
+            "b466f44f-83a1-45cf-ad12-7186681bd791",
+            "charging-point"
+          ],
+          "query": [
+            {
+              "key": "pointNumber",
+              "value": "4",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4(charging point  that's alrady occupied)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/technicians/d840ba96-4d1d-41d8-8d78-fba7d9b6a84d/charging-point?pointNumber=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "technicians",
+            "d840ba96-4d1d-41d8-8d78-fba7d9b6a84d",
+            "charging-point"
+          ],
+          "query": [
+            {
+              "key": "pointNumber",
+              "value": "4",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Charging receipts",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-receipts/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-receipts",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E1",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"tariffName\": \"Standard Tariff\",\r\n  \"remarks\": \"Charging session completed\",\r\n  \"kwhDelivered\": 25\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/charging-receipts/save?sessionId=f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-receipts",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "sessionId",
+              "value": "f3f0e71b-14c2-4fcf-8b9b-0e5f4b1c7bc1",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2(receipts by customer plate number)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-receipts/by-customer?plateNumber=RAE%20457%20B",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-receipts",
+            "by-customer"
+          ],
+          "query": [
+            {
+              "key": "plateNumber",
+              "value": "RAE%20457%20B",
+              "sortOrder": 0
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E3(delete receipts)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-receipts/delete/923303bf-6b41-4889-b309-4b8a2e5fff52",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-receipts",
+            "delete",
+            "923303bf-6b41-4889-b309-4b8a2e5fff52"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F1(charging station by status)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/stats/by-status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "stats",
+            "by-status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F2(Cancel sessions for one technician)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/cancel-day?technicianId=b466f44f-83a1-45cf-ad12-7186681bd791&date=2026-10-28",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "cancel-day"
+          ],
+          "query": [
+            {
+              "key": "technicianId",
+              "value": "b466f44f-83a1-45cf-ad12-7186681bd791",
+              "sortOrder": 0
+            },
+            {
+              "key": "date",
+              "value": "2026-10-28",
+              "sortOrder": 1
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus1(dashboard summary)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/dashboard/summary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "dashboard",
+            "summary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus 2(Testing pagination)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/page?page=0&size=5&sort=sessionDate,desc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "page"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0",
+              "sortOrder": 0
+            },
+            {
+              "key": "size",
+              "value": "5",
+              "sortOrder": 1
+            },
+            {
+              "key": "sort",
+              "value": "sessionDate,desc",
+              "sortOrder": 2
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus 2(Change page=0 to page=1)",
+      "request": {
+        "auth": {
+          "type": "inherit"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/charging-sessions/page?page=1&size=5&sort=sessionDate,desc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "charging-sessions",
+            "page"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "sortOrder": 0
+            },
+            {
+              "key": "size",
+              "value": "5",
+              "sortOrder": 1
+            },
+            {
+              "key": "sort",
+              "value": "sessionDate,desc",
+              "sortOrder": 2
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": []
+    }
+  ]
+}
